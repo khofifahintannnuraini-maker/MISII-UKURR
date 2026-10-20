@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Misi Ukur: Media pembelajaran interaktif pengukuran panjang dan berat untuk kelas IV SD/MI.">
+<title>Misi Ukur — Pengukuran Panjang & Berat | Kelas IV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ VARIABEL & RESET ============ */
+:root{
+  --sky:#4FC3F7; --sky-d:#29B6F6;
+  --sun:#FFD54F; --sun-d:#FFC107;
+  --mint:#81C784; --mint-d:#66BB6A;
+  --orange:#FFB74D; --orange-d:#FFA726;
+  --bg:#FAFAF7; --surface:#FFFFFF;
+  --text:#37474F; --muted:#607D8B; --danger:#EF5350;
+  --radius:20px; --radius-sm:14px;
+  --shadow:0 4px 16px rgba(55,71,79,.08);
+  --shadow-lg:0 10px 30px rgba(55,71,79,.12);
+  --fh:'Fredoka',system-ui,sans-serif;
+  --fb:'Poppins',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--fb);font-size:16px;line-height:1.6;color:var(--text);
+  background:var(--bg);min-height:100vh;display:flex;flex-direction:column;
+}
+h1,h2,h3,h4{font-family:var(--fh);font-weight:600;line-height:1.2}
+button{font-family:inherit;cursor:pointer;border:none}
+input,select{font-family:inherit;font-size:1rem}
+.hidden{display:none !important}
+
+/* ============ HEADER ============ */
+.app-header{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;padding:12px 20px;background:rgba(255,255,255,.95);
+  backdrop-filter:blur(10px);border-bottom:2px solid rgba(79,195,247,.15);
+}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer}
+.brand-icon{
+  width:42px;height:42px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--sky),var(--sun));
+  border-radius:12px;font-size:20px;
+}
+.brand-title{font-size:1.15rem;color:var(--sky-d);font-family:var(--fh)}
+.brand-sub{font-size:.7rem;color:var(--muted);margin-top:-2px}
+.header-actions{display:flex;gap:8px}
+.icon-btn{
+  width:44px;height:44px;border-radius:50%;background:#fff;
+  border:2px solid #E0E0E0;font-size:1.1rem;display:grid;place-items:center;
+  transition:all .2s;
+}
+.icon-btn:hover{border-color:var(--sky);transform:scale(1.05)}
+.icon-btn.muted{opacity:.45}
+
+/* ============ MAIN & PAGES ============ */
+main{flex:1;width:100%;max-width:1080px;margin:0 auto;padding:20px}
+.page{display:none;animation:fadeUp .35s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;justify-content:center;
+  padding:14px 26px;border-radius:999px;font-family:var(--fh);
+  font-weight:600;font-size:1rem;transition:all .15s ease;min-height:52px;
+}
+.btn:active{transform:scale(.96)}
+.btn-primary{
+  background:linear-gradient(135deg,var(--sky),var(--sky-d));
+  color:#fff;box-shadow:0 6px 0 var(--sky-d),var(--shadow);
+}
+.btn-primary:hover{background:var(--sky-d)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;box-shadow:0 4px 0 #90CAF9}
+.btn-mint{
+  background:linear-gradient(135deg,var(--mint),var(--mint-d));
+  color:#fff;box-shadow:0 6px 0 #43A047,var(--shadow);
+}
+.btn-mint:hover{background:var(--mint-d)}
+.btn-ghost{background:#fff;color:var(--text);border:2px solid #E0E0E0}
+.btn-ghost:hover{border-color:var(--sky);color:var(--sky-d)}
+.btn-sun{
+  background:linear-gradient(135deg,var(--sun),var(--sun-d));
+  color:#5D4037;box-shadow:0 6px 0 #FFB300,var(--shadow);
+}
+.btn-sun:hover{background:var(--sun-d)}
+
+/* ============ LOGIN ============ */
+#page-login.active{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 80px)}
+.login-card{
+  background:var(--surface);border-radius:var(--radius);
+  padding:32px 28px;box-shadow:var(--shadow-lg);
+  max-width:480px;width:100%;text-align:center;
+}
+.login-kiko svg{width:120px;height:120px;margin-bottom:8px;animation:float 3s ease-in-out infinite}
+.login-card h1{font-size:1.8rem;color:var(--sky-d);margin-bottom:4px}
+.tagline{color:var(--muted);font-size:.9rem;margin-bottom:24px}
+.login-card label{
+  display:block;text-align:left;font-weight:600;
+  font-family:var(--fh);margin:16px 0 8px;color:var(--text);
+}
+.login-card input,.login-card select{
+  width:100%;padding:14px 16px;border-radius:var(--radius-sm);
+  border:2px solid #E0E0E0;background:#FAFAFA;font-size:1rem;
+  transition:border-color .2s;outline:none;
+}
+.login-card input:focus,.login-card select:focus{border-color:var(--sky);background:#fff}
+.avatar-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px;
+}
+.avatar-option{
+  aspect-ratio:1;border-radius:var(--radius-sm);background:#F5F5F5;
+  border:3px solid transparent;font-size:2rem;display:grid;place-items:center;
+  transition:all .2s;cursor:pointer;min-height:60px;
+}
+.avatar-option:hover{background:#E1F5FE;transform:translateY(-2px)}
+.avatar-option.selected{
+  background:#FFF8E1;border-color:var(--sun-d);
+  box-shadow:0 4px 0 var(--sun-d);
+}
+.login-card .btn{margin-top:24px;width:100%}
+
+/* ============ DASHBOARD ============ */
+.welcome-card{
+  display:flex;align-items:center;gap:16px;
+  background:linear-gradient(135deg,#E1F5FE,#FFF8E1);
+  border-radius:var(--radius);padding:24px;margin-bottom:20px;
+  box-shadow:var(--shadow);
+}
+.welcome-avatar{
+  width:80px;height:80px;border-radius:50%;background:#fff;
+  display:grid;place-items:center;font-size:2.6rem;
+  box-shadow:0 4px 12px rgba(0,0,0,.1);flex-shrink:0;
+}
+.welcome-card h2{font-size:clamp(1.2rem,3.5vw,1.6rem);margin-bottom:2px}
+.welcome-card p{color:var(--muted);font-size:.9rem}
+
+.progress-panel{
+  background:var(--surface);border-radius:var(--radius);
+  padding:20px;margin-bottom:24px;box-shadow:var(--shadow);
+}
+.progress-info{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:10px;font-weight:600;font-family:var(--fh);
+}
+.progress-info #dashProgressPct{color:var(--mint-d);font-size:1.2rem}
+.progress-track{height:14px;background:#ECEFF1;border-radius:999px;overflow:hidden}
+.progress-track > div{
+  height:100%;width:0%;border-radius:999px;
+  background:linear-gradient(90deg,var(--mint),var(--sky));
+  transition:width .5s ease;
+}
+
+.menu-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:14px;
+}
+.menu-card{
+  background:var(--surface);border-radius:var(--radius);
+  padding:22px 18px;text-align:left;box-shadow:var(--shadow);
+  display:flex;flex-direction:column;gap:6px;border:3px solid transparent;
+  transition:all .2s;cursor:pointer;
+}
+.menu-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--sky)}
+.menu-emoji{font-size:2rem}
+.menu-title{font-family:var(--fh);font-weight:600;font-size:1.05rem}
+.menu-desc{font-size:.8rem;color:var(--muted)}
+
+/* ============ PAGE HEADER ============ */
+.back-row{margin-bottom:14px}
+.page-h2{font-size:clamp(1.3rem,3.5vw,1.7rem);margin-bottom:4px}
+.page-sub{color:var(--muted);margin-bottom:20px;font-size:.92rem}
+
+/* ============ MATERI ============ */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tab{
+  padding:10px 20px;border-radius:999px;background:#fff;
+  border:2px solid #E0E0E0;font-weight:500;font-size:.88rem;
+  transition:all .2s;font-family:var(--fb);
+}
+.tab:hover{border-color:var(--sky)}
+.tab.active{
+  background:var(--sky);color:#fff;border-color:var(--sky-d);
+  box-shadow:0 4px 0 var(--sky-d);
+}
+.tab.done::after{content:' ✓';color:var(--mint-d);font-weight:700}
+.tab.active.done::after{color:#fff}
+
+.materi-card{
+  background:var(--surface);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow);margin-bottom:18px;
+}
+.materi-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.materi-emoji{font-size:2rem;line-height:1}
+.materi-header h3{font-size:1.15rem;color:var(--sky-d)}
+.materi-body p{margin-bottom:12px}
+.materi-body ul,.materi-body ol{padding-left:22px;margin-bottom:12px}
+.materi-body li{margin-bottom:6px}
+.materi-body strong{color:var(--sky-d)}
+.satuan-row{
+  display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;
+  justify-content:center;
+}
+.satuan-chip{
+  background:#F5F5F5;border-radius:10px;padding:10px 14px;
+  text-align:center;font-family:var(--fh);font-weight:600;
+  border:2px solid transparent;min-width:60px;
+}
+.satuan-chip.hl{background:linear-gradient(135deg,var(--sun),var(--sun-d));border-color:#FFB300}
+.satuan-chip small{display:block;font-family:var(--fb);font-weight:400;font-size:.7rem;color:var(--muted)}
+.tip-box{
+  background:#FFF8E1;border-left:5px solid var(--sun-d);
+  border-radius:10px;padding:14px 16px;margin:14px 0;font-size:.9rem;
+}
+.example-box{
+  background:#F1F8E9;border-radius:12px;padding:14px 16px;
+  margin:12px 0;border:2px dashed var(--mint);
+}
+.example-box h4{color:var(--mint-d);margin-bottom:6px;font-size:.95rem}
+
+.mini-check{
+  background:#F5F9FF;border-radius:var(--radius-sm);
+  padding:16px;margin-top:16px;border:2px solid #E3F2FD;
+}
+.mini-check.solved{background:#F1F8E9;border-color:var(--mint)}
+.mc-label{
+  font-family:var(--fh);font-weight:700;font-size:.85rem;
+  color:var(--sky-d);letter-spacing:.5px;margin-bottom:6px;
+}
+.mc-q{font-weight:500;margin-bottom:10px}
+.mc-options{display:flex;gap:8px;flex-wrap:wrap}
+.mc-btn{
+  padding:10px 16px;border-radius:999px;background:#fff;
+  border:2px solid #E0E0E0;font-size:.9rem;font-family:var(--fb);
+  font-weight:500;transition:all .2s;min-height:44px;
+}
+.mc-btn:hover:not(:disabled){border-color:var(--sky)}
+.mc-btn.correct{background:#E8F5E9;border-color:var(--mint);animation:pop .3s}
+.mc-btn.wrong{background:#FFEBEE;border-color:var(--danger);animation:shake .3s}
+.mc-btn:disabled{cursor:default}
+.mc-feedback{margin-top:8px;font-weight:600;font-size:.88rem;min-height:20px}
+.mc-feedback.ok{color:var(--mint-d)}
+.mc-feedback.no{color:var(--danger)}
+
+/* ============ GAMES ============ */
+.game-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+.game-card{
+  background:var(--surface);border-radius:var(--radius);
+  padding:20px;box-shadow:var(--shadow);text-align:left;
+  border:3px solid transparent;transition:all .2s;cursor:pointer;
+  display:flex;flex-direction:column;gap:6px;
+}
+.game-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--sun-d)}
+.game-card.completed{border-color:var(--mint)}
+.game-badge{
+  display:inline-block;font-size:.7rem;font-weight:600;
+  background:var(--mint);color:#fff;padding:2px 10px;
+  border-radius:999px;margin-top:4px;align-self:flex-start;
+}
+.game-emoji{font-size:2rem}
+.game-title{font-family:var(--fh);font-weight:600;font-size:1.05rem}
+.game-desc{font-size:.82rem;color:var(--muted)}
+
+.game-panel{
+  background:var(--surface);border-radius:var(--radius);
+  padding:24px;box-shadow:var(--shadow);margin-top:16px;
+}
+.game-head{margin-bottom:16px}
+.game-head h3{color:var(--sky-d);font-size:1.2rem;margin-bottom:4px}
+.game-head p{font-size:.9rem;color:var(--muted)}
+.game-progress{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.85rem;color:var(--muted);margin-bottom:14px;
+  font-weight:600;
+}
+
+/* Game 1: sortir */
+.g1-items{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:10px;margin-bottom:16px;
+}
+.g1-item{
+  background:#FFF8E1;border:2px solid var(--sun);
+  border-radius:var(--radius-sm);padding:14px 8px;text-align:center;
+  cursor:pointer;transition:all .2s;user-select:none;
+}
+.g1-item:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.g1-item.selected{
+  background:var(--sun);border-color:#FFB300;
+  transform:scale(1.05);box-shadow:0 6px 0 #FFB300;
+}
+.g1-item .emoji{font-size:1.8rem;display:block;margin-bottom:4px}
+.g1-item .label{font-size:.8rem;font-weight:600}
+.g1-item.placed{opacity:.3;pointer-events:none}
+
+.g1-bins{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:10px;
+}
+.g1-bin{
+  background:#E1F5FE;border:3px dashed var(--sky);
+  border-radius:var(--radius-sm);padding:12px 8px;text-align:center;
+  transition:all .2s;cursor:pointer;min-height:100px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+}
+.g1-bin:hover{background:#B3E5FC}
+.g1-bin.correct{background:#E8F5E9;border-color:var(--mint);border-style:solid}
+.g1-bin .bin-emoji{font-size:1.6rem}
+.g1-bin .bin-label{font-size:.78rem;font-weight:600}
+.g1-bin .bin-contents{font-size:1rem;margin-top:4px;line-height:1}
+
+/* Game 2: matching */
+.g2-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.g2-col{display:flex;flex-direction:column;gap:10px}
+.g2-card{
+  background:#FFF;border:2px solid #E0E0E0;
+  border-radius:var(--radius-sm);padding:14px;
+  text-align:center;font-family:var(--fh);font-weight:600;font-size:1rem;
+  cursor:pointer;transition:all .2s;min-height:56px;
+  display:flex;align-items:center;justify-content:center;
+}
+.g2-card:hover{border-color:var(--sky)}
+.g2-card.selected{
+  background:#E1F5FE;border-color:var(--sky-d);
+  box-shadow:0 4px 0 var(--sky-d);
+}
+.g2-card.matched{
+  background:#E8F5E9;border-color:var(--mint);color:var(--mint-d);
+  pointer-events:none;opacity:.6;
+}
+
+/* Game 3-5: multiple choice */
+.gq-illustration{
+  background:#F5F9FF;border-radius:var(--radius-sm);
+  padding:24px 16px;text-align:center;margin-bottom:16px;
+  font-size:3rem;line-height:1.2;
+}
+.gq-illustration .caption{display:block;font-size:.85rem;color:var(--muted);margin-top:8px;font-family:var(--fb)}
+.gq-question{font-weight:600;font-size:1.05rem;margin-bottom:14px}
+.gq-options{display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.gq-option{
+  padding:14px 18px;border-radius:var(--radius-sm);
+  background:#F5F5F5;border:2px solid #E0E0E0;
+  text-align:left;font-size:.95rem;transition:all .2s;
+  font-family:var(--fb);min-height:52px;
+}
+.gq-option:hover:not(:disabled){border-color:var(--sky);background:#E1F5FE}
+.gq-option.correct{background:#E8F5E9;border-color:var(--mint);animation:pop .3s}
+.gq-option.wrong{background:#FFEBEE;border-color:var(--danger);animation:shake .3s}
+.gq-option:disabled{cursor:default}
+.gq-feedback{
+  font-weight:600;margin-bottom:12px;min-height:22px;font-size:.9rem;
+}
+.gq-feedback.ok{color:var(--mint-d)}
+.gq-feedback.no{color:var(--danger)}
+
+.game-complete{
+  text-align:center;padding:24px 12px;
+}
+.game-complete .big-emoji{font-size:4rem;margin-bottom:8px;display:block;animation:pop .6s}
+.game-complete h3{color:var(--mint-d);font-size:1.4rem;margin-bottom:8px}
+.game-complete p{color:var(--muted);margin-bottom:16px}
+
+/* ============ QUIZ ============ */
+.quiz-wrap{max-width:680px;margin:0 auto}
+.quiz-card{
+  background:var(--surface);border-radius:var(--radius);
+  padding:26px;box-shadow:var(--shadow);
+}
+.quiz-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:14px;font-size:.88rem;color:var(--muted);font-weight:600;
+}
+.quiz-track{height:8px;background:#ECEFF1;border-radius:999px;overflow:hidden;margin-bottom:20px}
+.quiz-track > div{
+  height:100%;width:0%;border-radius:999px;
+  background:linear-gradient(90deg,var(--mint),var(--sun));
+  transition:width .4s ease;
+}
+.quiz-q{font-size:1.1rem;margin-bottom:16px;line-height:1.45}
+.quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.quiz-option{
+  padding:14px 18px;border-radius:var(--radius-sm);
+  background:#F5F5F5;border:2px solid #E0E0E0;
+  text-align:left;font-size:.95rem;transition:all .2s;
+  font-family:var(--fb);min-height:52px;
+}
+.quiz-option:hover:not(:disabled){border-color:var(--sky);background:#E1F5FE}
+.quiz-option.correct{background:#E8F5E9;border-color:var(--mint);animation:pop .3s}
+.quiz-option.wrong{background:#FFEBEE;border-color:var(--danger);animation:shake .3s}
+.quiz-option:disabled{cursor:default}
+.quiz-feedback{
+  font-weight:600;margin-bottom:12px;min-height:22px;font-size:.9rem;
+}
+.quiz-feedback.ok{color:var(--mint-d)}
+.quiz-feedback.no{color:var(--danger)}
+
+.quiz-result{text-align:center;padding:12px 0}
+.quiz-result .medal{font-size:5rem;margin-bottom:8px;display:block;animation:pop .6s}
+.quiz-result h3{font-size:1.5rem;color:var(--sky-d);margin-bottom:4px}
+.quiz-result .score-num{
+  font-family:var(--fh);font-weight:700;font-size:3.2rem;
+  color:var(--mint-d);line-height:1;margin:12px 0;
+}
+.quiz-result .badge-name{
+  display:inline-block;background:linear-gradient(135deg,var(--sun),var(--sun-d));
+  color:#5D4037;padding:6px 18px;border-radius:999px;
+  font-family:var(--fh);font-weight:700;font-size:.9rem;margin:8px 0;
+}
+.quiz-result p{color:var(--muted);margin-bottom:16px}
+.quiz-result .actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+
+.review-list{margin-top:16px;text-align:left}
+.review-item{
+  background:#F5F9FF;border-radius:12px;padding:14px;margin-bottom:10px;
+  border-left:4px solid var(--sky);
+}
+.review-item.correct{border-left-color:var(--mint);background:#F1F8E9}
+.review-item.wrong{border-left-color:var(--danger);background:#FFEBEE}
+.review-item h4{font-size:.92rem;margin-bottom:6px}
+.review-item .answer{font-size:.85rem;color:var(--muted);margin-bottom:4px}
+.review-item .answer strong{color:var(--mint-d)}
+
+/* ============ HASIL ============ */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;margin-bottom:24px;
+}
+.stat-card{
+  background:var(--surface);border-radius:var(--radius-sm);
+  padding:16px;text-align:center;box-shadow:var(--shadow);
+}
+.stat-num{
+  font-family:var(--fh);font-weight:700;font-size:1.8rem;
+  color:var(--sky-d);line-height:1;
+}
+.stat-lbl{font-size:.78rem;color:var(--muted);margin-top:4px}
+
+.badge-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+  gap:12px;margin-bottom:24px;
+}
+.badge-item{
+  aspect-ratio:1;border-radius:50%;background:#ECEFF1;
+  border:4px dashed #B0BEC5;display:grid;place-items:center;
+  font-size:2.4rem;color:#B0BEC5;transition:all .3s;
+}
+.badge-item.earned{
+  background:linear-gradient(135deg,var(--sun),var(--sun-d));
+  border:4px solid #FF8F00;border-style:solid;color:#fff;
+  box-shadow:0 6px 20px rgba(255,193,7,.4);
+}
+
+.history-list{background:var(--surface);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.history-list h3{margin-bottom:12px;font-size:1.1rem;color:var(--sky-d)}
+.history-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid #ECEFF1;font-size:.88rem;
+}
+.history-item:last-child{border-bottom:none}
+.history-score{font-family:var(--fh);font-weight:700;color:var(--mint-d)}
+
+/* ============ PETUNJUK / TENTANG ============ */
+.info-card{
+  background:var(--surface);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--shadow);margin-bottom:14px;
+}
+.info-card h3{color:var(--sky-d);margin-bottom:8px;font-size:1.1rem;display:flex;align-items:center;gap:8px}
+.info-card p,.info-card li{font-size:.92rem;margin-bottom:6px}
+.info-card ul{padding-left:20px}
+
+/* ============ CONFETTI ============ */
+.confetti-layer{
+  position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;
+}
+.confetti-piece{
+  position:absolute;top:-20px;width:10px;height:14px;
+  border-radius:2px;animation:confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  to{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+
+/* ============ TOAST ============ */
+.toast{
+  position:fixed;bottom:24px;left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--text);color:#fff;padding:12px 24px;
+  border-radius:999px;font-family:var(--fh);font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:1000;
+  opacity:0;transition:all .3s ease;font-size:.9rem;
+  pointer-events:none;max-width:90vw;text-align:center;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{background:var(--mint-d)}
+.toast.no{background:var(--danger)}
+
+/* ============ ANIMATIONS ============ */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* ============ FOOTER ============ */
+.app-footer{
+  text-align:center;padding:20px;font-size:.8rem;
+  color:var(--muted);border-top:2px solid #ECEFF1;margin-top:20px;
+}
+.app-footer small{font-size:.7rem;opacity:.7}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:720px){
+  .app-header{padding:10px 14px}
+  main{padding:14px}
+  .login-card{padding:24px 20px}
+  .materi-card,.game-panel,.quiz-card{padding:18px}
+  .btn{padding:12px 20px;font-size:.92rem}
+  .g2-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .g2-card{padding:10px;font-size:.85rem;min-height:48px}
+}
+@media (max-width:380px){
+  body{font-size:15px}
+  .brand-title{font-size:1rem}
+  .avatar-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="app-header">
+  <div class="brand" id="brandHome">
+    <div class="brand-icon">🔍</div>
+    <div>
+      <div class="brand-title">Misi Ukur</div>
+      <div class="brand-sub">Panjang &amp; Berat · Kelas IV</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="icon-btn" id="homeBtn" title="Beranda" aria-label="Beranda">🏠</button>
+    <button class="icon-btn" id="soundBtn" title="Suara" aria-label="Toggle suara">🔊</button>
+  </div>
+</header>
+
+<!-- ============ MAIN ============ -->
+<main>
+
+<!-- ============ PAGE: LOGIN ============ -->
+<section class="page active" id="page-login">
+  <div class="login-card">
+    <div class="login-kiko">
+      <svg viewBox="0 0 240 240" role="img" aria-label="Si Kiko si kucing detektif">
+        <ellipse cx="120" cy="210" rx="80" ry="12" fill="#000" opacity=".08"/>
+        <ellipse cx="120" cy="160" rx="62" ry="55" fill="#FFB74D"/>
+        <circle cx="120" cy="100" r="58" fill="#FFB74D"/>
+        <path d="M78 58 L68 18 L108 44 Z" fill="#FFB74D"/>
+        <path d="M162 58 L172 18 L132 44 Z" fill="#FFB74D"/>
+        <path d="M80 55 L74 30 L100 46 Z" fill="#FF8A65"/>
+        <path d="M160 55 L166 30 L140 46 Z" fill="#FF8A65"/>
+        <path d="M56 78 Q120 40 184 78 L184 70 Q120 30 56 70 Z" fill="#5D4037"/>
+        <rect x="56" y="72" width="128" height="10" rx="5" fill="#3E2723"/>
+        <circle cx="100" cy="100" r="10" fill="#37474F"/>
+        <circle cx="140" cy="100" r="10" fill="#37474F"/>
+        <circle cx="103" cy="97" r="3" fill="#fff"/>
+        <circle cx="143" cy="97" r="3" fill="#fff"/>
+        <path d="M116 116 L124 116 L120 122 Z" fill="#FF8A65"/>
+        <path d="M120 122 Q112 130 106 126" stroke="#37474F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M120 122 Q128 130 134 126" stroke="#37474F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1>Misi Ukur</h1>
+    <p class="tagline">Bantu Si Kiko memecahkan kasus pengukuran!</p>
+
+    <label>Pilih Avatar Detektif</label>
+    <div class="avatar-grid" id="avatarGrid"></div>
+
+    <label for="nameInput">Nama Detektif</label>
+    <input id="nameInput" type="text" placeholder="Contoh: Budi" maxlength="20" autocomplete="off">
+
+    <label for="kelasInput">Kelas</label>
+    <select id="kelasInput">
+      <option value="IV A">IV A</option>
+      <option value="IV B">IV B</option>
+      <option value="IV C">IV C</option>
+      <option value="IV D">IV D</option>
+    </select>
+
+    <button class="btn btn-primary" id="startBtn">🚀 Mulai Misi</button>
+  </div>
+</section>
+
+<!-- ============ PAGE: DASHBOARD ============ -->
+<section class="page" id="page-dashboard">
+  <div class="welcome-card">
+    <div class="welcome-avatar" id="dashAvatar">🐱</div>
+    <div>
+      <h2 id="dashGreeting">Halo, Detektif!</h2>
+      <p id="dashSub">Ayo selesaikan misi hari ini.</p>
+    </div>
+  </div>
+  <div class="progress-panel">
+    <div class="progress-info">
+      <span>📈 Kemajuan Belajar</span>
+      <span id="dashProgressPct">0%</span>
+    </div>
+    <div class="progress-track"><div id="dashProgressFill"></div></div>
+  </div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- ============ PAGE: MATERI ============ -->
+<section class="page" id="page-materi">
+  <div class="back-row"><button class="btn btn-ghost" data-nav="dashboard">← Kembali</button></div>
+  <h2 class="page-h2">📚 Materi Misi Ukur</h2>
+  <p class="page-sub">Pilih sub-misi. Baca pelan-pelan, lalu jawab Mini Check ya!</p>
+  <div class="tabs" id="materiTabs"></div>
+  <div id="materiContent"></div>
+</section>
+
+<!-- ============ PAGE: AKTIVITAS ============ -->
+<section class="page" id="page-aktivitas">
+  <div class="back-row"><button class="btn btn-ghost" data-nav="dashboard">← Kembali</button></div>
+  <h2 class="page-h2">🎮 Aktivitas Belajar</h2>
+  <p class="page-sub">Pilih salah satu dari 5 modul game seru!</p>
+  <div id="gameGrid" class="game-grid"></div>
+  <div id="gameView" class="hidden">
+    <div class="back-row" style="margin-top:16px">
+      <button class="btn btn-ghost" id="backToGames">← Pilih Modul Lain</button>
+    </div>
+    <div id="gameContent"></div>
+  </div>
+</section>
+
+<!-- ============ PAGE: KUIS ============ -->
+<section class="page" id="page-kuis">
+  <div class="back-row"><button class="btn btn-ghost" data-nav="dashboard">← Kembali</button></div>
+  <h2 class="page-h2">🧩 Kuis Evaluasi</h2>
+  <p class="page-sub">10 soal pilihan ganda. Skor ≥ 70 dapat lencana!</p>
+  <div class="quiz-wrap" id="quizContainer"></div>
+</section>
+
+<!-- ============ PAGE: HASIL ============ -->
+<section class="page" id="page-hasil">
+  <div class="back-row"><button class="btn btn-ghost" data-nav="dashboard">← Kembali</button></div>
+  <h2 class="page-h2">🏆 Hasil Belajar</h2>
+  <p class="page-sub">Lihat statistik, lencana, dan riwayat kuis.</p>
+  <div id="hasilContent"></div>
+</section>
+
+<!-- ============ PAGE: PETUNJUK ============ -->
+<section class="page" id="page-petunjuk">
+  <div class="back-row"><button class="btn btn-ghost" data-nav="dashboard">← Kembali</button></div>
+  <h2 class="page-h2">📖 Petunjuk Bermain</h2>
+  <p class="page-sub">Baca dulu supaya makin jago!</p>
+  <div id="petunjukContent"></div>
+</section>
+
+<!-- ============ PAGE: TENTANG ============ -->
+<section class="page" id="page-tentang">
+  <div class="back-row"><button class="btn btn-ghost" data-nav="dashboard">← Kembali</button></div>
+  <h2 class="page-h2">ℹ️ Tentang Media</h2>
+  <p class="page-sub">Identitas media pembelajaran.</p>
+  <div id="tentangContent"></div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="app-footer">
+  <div>© 2025 Misi Ukur · Media Pembelajaran Matematika Kelas IV SD/MI</div>
+  <small>Dibuat dengan ❤️ untuk para detektif cilik</small>
+</footer>
+
+<!-- ============ CONFETTI & TOAST ============ -->
+<div id="confettiLayer" class="confetti-layer"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+'use strict';
+/* ============================================================
+   MISI UKUR — ALL-IN-ONE JS
+   ============================================================ */
+
+/* ========== 1. STATE ========== */
+const STORAGE_KEY = 'misiukur_v1';
+const DEFAULT_STATE = {
+  user: { name:'', kelas:'IV A', avatar:'🐱', loggedIn:false },
+  progress: {
+    materi: { panjang:false, berat:false, penerapan:false },
+    games: { g1:false, g2:false, g3:false, g4:false, g5:false },
+    gamesScores: { g1:0, g2:0, g3:0, g4:0, g5:0 },
+    quizDone: false
+  },
+  quiz: { bestScore:0, history:[] },
+  sound: true
+};
+
+let state = loadState();
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) return deepMerge(JSON.parse(JSON.stringify(DEFAULT_STATE)), JSON.parse(raw));
+  }catch(e){}
+  return JSON.parse(JSON.stringify(DEFAULT_STATE));
+}
+function deepMerge(a,b){
+  for(const k in b){
+    if(b[k] && typeof b[k]==='object' && !Array.isArray(b[k]) && a[k]) deepMerge(a[k],b[k]);
+    else a[k]=b[k];
+  }
+  return a;
+}
+function saveState(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+}
+
+/* ========== 2. SOUND (Web Audio API) ========== */
+const SFX = {
+  ctx:null,
+  get enabled(){ return state.sound; },
+  ensure(){
+    if(!this.ctx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(AC) this.ctx = new AC();
+    }
+    if(this.ctx && this.ctx.state==='suspended') this.ctx.resume();
+    return this.ctx;
+  },
+  tone(freq, dur, type='sine', vol=0.15){
+    if(!this.enabled) return;
+    const ctx = this.ensure(); if(!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(vol, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + dur);
+  },
+  correct(){ this.tone(660,.1,'sine'); setTimeout(()=>this.tone(880,.15,'sine'),100); },
+  wrong(){ this.tone(220,.2,'square',.1); },
+  click(){ this.tone(440,.05,'sine',.06); },
+  win(){ [523,659,784,1047].forEach((f,i)=>setTimeout(()=>this.tone(f,.2,'sine'),i*100)); }
+};
+
+/* ========== 3. CONFETTI ========== */
+function confetti(count=40){
+  const layer = document.getElementById('confettiLayer');
+  const colors = ['#FFD54F','#4FC3F7','#81C784','#FFB74D','#EF5350','#BA68C8'];
+  for(let i=0;i<count;i++){
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.left = Math.random()*100 + '%';
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDelay = (Math.random()*.3) + 's';
+    p.style.animationDuration = (1.5 + Math.random()*1) + 's';
+    p.style.transform = 'rotate(' + (Math.random()*360) + 'deg)';
+    layer.appendChild(p);
+    setTimeout(()=>p.remove(), 3000);
+  }
+}
+
+/* ========== 4. TOAST ========== */
+function toast(msg, type='info'){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show ' + (type==='ok'?'ok':type==='no'?'no':'');
+  clearTimeout(el._t);
+  el._t = setTimeout(()=>el.classList.remove('show'), 2200);
+}
+
+/* ========== 5. NAVIGASI ========== */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById('page-'+id);
+  if(target){
+    target.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  document.getElementById('homeBtn').style.display = (id==='login') ? 'none' : '';
+  // Refresh dynamic pages
+  if(id==='dashboard') renderDashboard();
+  if(id==='materi') renderMateri();
+  if(id==='aktivitas') renderGameGrid();
+  if(id==='kuis') renderQuizStart();
+  if(id==='hasil') renderHasil();
+  if(id==='petunjuk') renderPetunjuk();
+  if(id==='tentang') renderTentang();
+}
+
+document.addEventListener('click', e=>{
+  const nav = e.target.closest('[data-nav]');
+  if(nav){ e.preventDefault(); showPage(nav.dataset.nav); return; }
+});
+
+document.getElementById('homeBtn').addEventListener('click', ()=>{
+  SFX.click();
+  showPage(state.user.loggedIn ? 'dashboard' : 'login');
+});
+document.getElementById('brandHome').addEventListener('click', ()=>{
+  showPage(state.user.loggedIn ? 'dashboard' : 'login');
+});
+
+/* ========== 6. LOGIN ========== */
+const AVATARS = ['🐱','🐶','🐰','🦊','🐼','🦁','🐨','🐯'];
+let selectedAvatar = state.user.avatar || '🐱';
+
+function renderAvatars(){
+  const grid = document.getElementById('avatarGrid');
+  grid.innerHTML = AVATARS.map(a =>
+    `<button class="avatar-option ${a===selectedAvatar?'selected':''}" data-av="${a}" aria-label="Avatar ${a}">${a}</button>`
+  ).join('');
+  grid.querySelectorAll('.avatar-option').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      selectedAvatar = btn.dataset.av;
+      grid.querySelectorAll('.avatar-option').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      SFX.click();
+    });
+  });
+}
+
+document.getElementById('startBtn').addEventListener('click', ()=>{
+  const name = document.getElementById('nameInput').value.trim();
+  const kelas = document.getElementById('kelasInput').value;
+  if(!name){ toast('Tulis namamu dulu ya 😊','no'); document.getElementById('nameInput').focus(); return; }
+  state.user = { name, kelas, avatar:selectedAvatar, loggedIn:true };
+  saveState();
+  SFX.win();
+  toast('Selamat datang, Detektif ' + name + '! 🕵️','ok');
+  showPage('dashboard');
+});
+
+// Prefill
+document.getElementById('nameInput').value = state.user.name || '';
+document.getElementById('kelasInput').value = state.user.kelas || 'IV A';
+
+/* ========== 7. DASHBOARD ========== */
+function calcProgress(){
+  const p = state.progress;
+  let done = 0;
+  const total = 9; // 3 materi + 5 game + 1 quiz
+  if(p.materi.panjang) done++;
+  if(p.materi.berat) done++;
+  if(p.materi.penerapan) done++;
+  for(const g of ['g1','g2','g3','g4','g5']) if(p.games[g]) done++;
+  if(p.quizDone) done++;
+  return Math.round(done/total*100);
+}
+
+function renderDashboard(){
+  if(!state.user.loggedIn){ showPage('login'); return; }
+  document.getElementById('dashAvatar').textContent = state.user.avatar;
+  document.getElementById('dashGreeting').textContent = 'Halo, Detektif ' + state.user.name + '! 👋';
+  document.getElementById('dashSub').textContent = 'Kelas ' + state.user.kelas + ' · Ayo lanjutkan misimu!';
+  const pct = calcProgress();
+  document.getElementById('dashProgressPct').textContent = pct + '%';
+  document.getElementById('dashProgressFill').style.width = pct + '%';
+
+  const menus = [
+    { id:'materi', emoji:'📚', title:'Materi', desc:'Pelajari panjang & berat' },
+    { id:'aktivitas', emoji:'🎮', title:'Aktivitas', desc:'5 modul game seru' },
+    { id:'kuis', emoji:'🧩', title:'Kuis Evaluasi', desc:'10 soal pilihan ganda' },
+    { id:'hasil', emoji:'🏆', title:'Hasil Belajar', desc:'Lencana & statistik' },
+    { id:'petunjuk', emoji:'📖', title:'Petunjuk', desc:'Cara bermain' },
+    { id:'tentang', emoji:'ℹ️', title:'Tentang', desc:'Info media' }
+  ];
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = menus.map(m => `
+    <button class="menu-card" data-nav="${m.id}">
+      <span class="menu-emoji">${m.emoji}</span>
+      <span class="menu-title">${m.title}</span>
+      <span class="menu-desc">${m.desc}</span>
+    </button>
+  `).join('');
+}
+
+/* ========== 8. MATERI ========== */
+const MATERI_DATA = {
+  panjang: [
+    {
+      emoji:'📏', title:'Mengenal Alat Ukur Panjang',
+      content:`
+        <p>Alat ukur panjang dibagi menjadi 3 macam sesuai kebutuhannya:</p>
+        <ul>
+          <li><strong>Penggaris</strong> (cm &amp; mm): untuk benda pendek &amp; lurus. Contoh: buku tulis, pensil, penghapus.</li>
+          <li><strong>Meteran Saku / Rol</strong> (m &amp; cm): untuk bidang datar lebih panjang. Contoh: meja belajar, pintu, papan tulis.</li>
+          <li><strong>Meteran Kain / Pita</strong> (cm): lentur &amp; fleksibel, untuk bidang melengkung atau tubuh. Contoh: lingkar pinggang, lingkar kepala.</li>
+        </ul>
+        <div class="tip-box"><strong>💡 Kata Kiko:</strong> Pilih alat ukur sesuai benda yang diukur, ya!</div>
+      `,
+      miniCheck:{
+        q:'Budi ingin mengukur lingkar dadanya untuk membuat seragam. Alat ukur mana yang paling tepat?',
+        options:['Penggaris','Meteran Kain'],
+        answer:1,
+        hint:'Benar! Meteran kain lentur, cocok untuk mengukur bagian tubuh yang melengkung.'
+      }
+    },
+    {
+      emoji:'🪜', title:'Konversi Meter (m) ↔ Sentimeter (cm)',
+      content:`
+        <p>Tangga satuan panjang: <strong>km → hm → dam → m → dm → cm → mm</strong></p>
+        <div class="satuan-row">
+          <div class="satuan-chip">m<small>meter</small></div>
+          <div class="satuan-chip">dm<small>desimeter</small></div>
+          <div class="satuan-chip hl">cm<small>sentimeter</small></div>
+        </div>
+        <ul>
+          <li>Turun 1 tingkat → <strong>× 10</strong></li>
+          <li>Naik 1 tingkat → <strong>÷ 10</strong></li>
+        </ul>
+        <div class="example-box">
+          <h4>Contoh</h4>
+          <p>1 m = 100 cm (turun 2 tangga × 100)</p>
+          <p>3 m = 3 × 100 = <strong>300 cm</strong></p>
+          <p>500 cm = 500 ÷ 100 = <strong>5 m</strong></p>
+          <p>2 m 45 cm = 200 + 45 = <strong>245 cm</strong></p>
+        </div>
+      `,
+      miniCheck:{
+        q:'Tinggi tiang bendera 4 m. Berapa tinggi tiang dalam sentimeter?',
+        options:['40 cm','400 cm'],
+        answer:1,
+        hint:'Benar! 4 m × 100 = 400 cm.'
+      }
+    },
+    {
+      emoji:'🧮', title:'Pembulatan Hasil Pengukuran Panjang',
+      content:`
+        <p>Pembulatan ke cm terdekat berdasarkan angka mm di belakang koma.</p>
+        <ul>
+          <li>Angka &lt; 5 (0–4) → <strong>bulatkan ke bawah</strong></li>
+          <li>Angka ≥ 5 (5–9) → <strong>bulatkan ke atas</strong></li>
+        </ul>
+        <div class="example-box">
+          <h4>Contoh</h4>
+          <p>Pensil 8,3 cm → angka 3 &lt; 5 → <strong>8 cm</strong></p>
+          <p>Penghapus 4,7 cm → angka 7 ≥ 5 → <strong>5 cm</strong></p>
+        </div>
+      `,
+      miniCheck:{
+        q:'Panjang spidol 12,6 cm. Pembulatan ke cm terdekat adalah…',
+        options:['12 cm','13 cm'],
+        answer:1,
+        hint:'Benar! Angka 6 ≥ 5, jadi dibulatkan ke atas menjadi 13 cm.'
+      }
+    }
+  ],
+  berat: [
+    {
+      emoji:'⚖️', title:'Mengenal Alat Ukur Berat',
+      content:`
+        <ul>
+          <li><strong>Timbangan Badan</strong> (kg): mengukur berat tubuh manusia.</li>
+          <li><strong>Timbangan Pasar / Bebek</strong> (kg): pakai anak timbangan, untuk buah &amp; sayur.</li>
+          <li><strong>Timbangan Digital</strong> (g &amp; kg): tampil angka desimal di layar, untuk supermarket.</li>
+          <li><strong>Timbangan Kue / Neraca</strong> (g): kapasitas kecil, untuk bahan kue.</li>
+        </ul>
+        <div class="tip-box"><strong>💡 Kata Kiko:</strong> Untuk bahan kue, pakai timbangan kue. Untuk badan, pakai timbangan badan!</div>
+      `,
+      miniCheck:{
+        q:'Ibu ingin menimbang 250 gram mentega untuk membuat kue. Timbangan apa yang paling praktis?',
+        options:['Timbangan Badan','Timbangan Kue'],
+        answer:1,
+        hint:'Benar! Timbangan kue cocok untuk bahan masakan dengan ukuran kecil.'
+      }
+    },
+    {
+      emoji:'🪜', title:'Konversi Berat (kg, g, ons, pon)',
+      content:`
+        <p>Tangga satuan berat: <strong>kg → hg → dag → g → dg → cg → mg</strong></p>
+        <div class="satuan-row">
+          <div class="satuan-chip">kg<small>kilogram</small></div>
+          <div class="satuan-chip">hg<small>ons</small></div>
+          <div class="satuan-chip hl">g<small>gram</small></div>
+        </div>
+        <ul>
+          <li><strong>1 kg = 1.000 g</strong></li>
+          <li><strong>1 kg = 10 ons</strong></li>
+          <li><strong>1 ons = 100 g</strong></li>
+          <li><strong>1 kg = 2 pon</strong></li>
+          <li><strong>1 pon = 500 g</strong></li>
+        </ul>
+        <div class="example-box">
+          <h4>Contoh</h4>
+          <p>2 kg = 2 × 1.000 = <strong>2.000 g</strong></p>
+          <p>3 kg 200 g = 3.000 + 200 = <strong>3.200 g</strong></p>
+          <p>4 ons = 4 × 100 = <strong>400 g</strong></p>
+          <p>2 pon = 2 × 500 = <strong>1.000 g = 1 kg</strong></p>
+        </div>
+      `,
+      miniCheck:{
+        q:'Ayah membeli 3 kg apel. Berapa gram berat apel tersebut?',
+        options:['300 g','3.000 g'],
+        answer:1,
+        hint:'Benar! 3 × 1.000 = 3.000 gram.'
+      }
+    },
+    {
+      emoji:'🧮', title:'Pembulatan Hasil Pengukuran Berat',
+      content:`
+        <p>Aturannya sama dengan pembulatan desimal biasa.</p>
+        <ul>
+          <li>Angka &lt; 5 → bulatkan ke bawah</li>
+          <li>Angka ≥ 5 → bulatkan ke atas</li>
+        </ul>
+        <div class="example-box">
+          <h4>Contoh</h4>
+          <p>Semangka 2,4 kg → angka 4 &lt; 5 → <strong>2 kg</strong></p>
+          <p>Beras 4,8 kg → angka 8 ≥ 5 → <strong>5 kg</strong></p>
+        </div>
+      `,
+      miniCheck:{
+        q:'Penimbangan ayam menunjukkan angka 1,5 kg. Pembulatan ke kg terdekat…',
+        options:['1 kg','2 kg'],
+        answer:1,
+        hint:'Benar! Angka 5 ≥ 5, jadi dibulatkan ke atas menjadi 2 kg.'
+      }
+    }
+  ],
+  penerapan: [
+    {
+      emoji:'🛒', title:'Soal Cerita Pengukuran',
+      content:`
+        <p>Gunakan <strong>strategi 3 langkah</strong>:</p>
+        <ol>
+          <li>Samakan semua satuan ke satuan yang ditanyakan.</li>
+          <li>Lakukan operasi hitung (+ atau −).</li>
+          <li>Bulatkan atau konversikan jika diminta.</li>
+        </ol>
+        <div class="example-box">
+          <h4>Contoh Soal</h4>
+          <p>"Ibu membeli 2 kg gula pasir dan 700 gram tepung terigu. Berapa gram total belanjaan Ibu?"</p>
+          <p>1) 2 kg = 2.000 gram</p>
+          <p>2) 2.000 g + 700 g = <strong>2.700 gram</strong></p>
+          <p>Jadi, total belanjaan Ibu 2.700 gram.</p>
+        </div>
+      `,
+      miniCheck:{
+        q:'Ibu membeli 1 kg telur dan 500 gram gula. Berapa gram total belanjaan Ibu?',
+        options:['600 g','1.500 g'],
+        answer:1,
+        hint:'Benar! 1.000 g + 500 g = 1.500 g.'
+      }
+    }
+  ]
+};
+
+let currentMateriTab = 'panjang';
+
+function renderMateri(){
+  const tabs = document.getElementById('materiTabs');
+  const labels = { panjang:'1. Panjang', berat:'2. Berat', penerapan:'3. Penerapan' };
+  tabs.innerHTML = Object.keys(MATERI_DATA).map(k =>
+    `<button class="tab ${k===currentMateriTab?'active':''} ${state.progress.materi[k]?'done':''}" data-tab="${k}">${labels[k]}</button>`
+  ).join('');
+  tabs.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click', ()=>{
+      currentMateriTab = t.dataset.tab;
+      state.progress.materi[currentMateriTab] = true;
+      saveState();
+      SFX.click();
+      renderMateri();
+    });
+  });
+
+  if(!state.progress.materi[currentMateriTab]){
+    state.progress.materi[currentMateriTab] = true;
+    saveState();
+  }
+
+  const content = document.getElementById('materiContent');
+  const items = MATERI_DATA[currentMateriTab];
+  content.innerHTML = items.map((item, idx) => `
+    <div class="materi-card">
+      <div class="materi-header">
+        <span class="materi-emoji">${item.emoji}</span>
+        <h3>${item.title}</h3>
+      </div>
+      <div class="materi-body">${item.content}</div>
+      ${item.miniCheck ? `
+        <div class="mini-check" data-mc="${idx}">
+          <p class="mc-label">🎯 Mini Check</p>
+          <p class="mc-q">${item.miniCheck.q}</p>
+          <div class="mc-options">
+            ${item.miniCheck.options.map((opt,i)=>`
+              <button class="mc-btn" data-opt="${i}">${String.fromCharCode(65+i)}. ${opt}</button>
+            `).join('')}
+          </div>
+          <div class="mc-feedback"></div>
+        </div>
+      ` : ''}
+    </div>
+  `).join('');
+
+  content.querySelectorAll('.mini-check').forEach(mc=>{
+    const idx = parseInt(mc.dataset.mc,10);
+    const item = items[idx];
+    const feedback = mc.querySelector('.mc-feedback');
+    mc.querySelectorAll('.mc-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(mc.classList.contains('solved')) return;
+        const chosen = parseInt(btn.dataset.opt,10);
+        if(chosen === item.miniCheck.answer){
+          btn.classList.add('correct');
+          feedback.textContent = '✅ ' + item.miniCheck.hint;
+          feedback.className = 'mc-feedback ok';
+          mc.classList.add('solved');
+          mc.querySelectorAll('.mc-btn').forEach(b=>b.disabled=true);
+          SFX.correct(); confetti(20);
+        } else {
+          btn.classList.add('wrong');
+          feedback.textContent = '❌ Belum tepat. Coba lagi!';
+          feedback.className = 'mc-feedback no';
+          SFX.wrong();
+          setTimeout(()=>btn.classList.remove('wrong'), 600);
+        }
+      });
+    });
+  });
+}
+
+/* ========== 9. ACTIVITAS — 5 MODUL GAME ========== */
+const GAMES = {
+  g1:{ emoji:'🎯', title:'Sortir Benda & Alat Ukur', desc:'Pilih alat ukur yang tepat untuk 4 benda' },
+  g2:{ emoji:'🌉', title:'Jembatan Konversi', desc:'Hubungkan 4 pasang satuan setara' },
+  g3:{ emoji:'🔍', title:'Detektif Skala', desc:'Baca 3 gambar skala & pembulatan' },
+  g4:{ emoji:'🛒', title:'Kasir Cilik', desc:'Selesaikan 3 soal cerita belanja' },
+  g5:{ emoji:'🧠', title:'Ayo Berpikir!', desc:'Jawab 3 kasus bernalar' }
+};
+
+function renderGameGrid(){
+  const grid = document.getElementById('gameGrid');
+  grid.innerHTML = Object.keys(GAMES).map(id=>{
+    const g = GAMES[id];
+    const done = state.progress.games[id];
+    const score = state.progress.gamesScores[id];
+    return `
+      <button class="game-card ${done?'completed':''}" data-game="${id}">
+        <span class="game-emoji">${g.emoji}</span>
+        <span class="game-title">${g.title}</span>
+        <span class="game-desc">${g.desc}</span>
+        ${done ? `<span class="game-badge">✓ Skor ${score}</span>` : ''}
+      </button>
+    `;
+  }).join('');
+  grid.querySelectorAll('.game-card').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      const id = c.dataset.game;
+      SFX.click();
+      document.getElementById('gameGrid').classList.add('hidden');
+      document.getElementById('gameView').classList.remove('hidden');
+      openGame(id);
+    });
+  });
+  document.getElementById('gameView').classList.add('hidden');
+  document.getElementById('gameGrid').classList.remove('hidden');
+}
+
+document.getElementById('backToGames').addEventListener('click', ()=>{
+  document.getElementById('gameView').classList.add('hidden');
+  document.getElementById('gameGrid').classList.remove('hidden');
+  renderGameGrid();
+});
+
+function openGame(id){
+  const content = document.getElementById('gameContent');
+  content.innerHTML = '';
+  if(id==='g1') startGame1(content);
+  else if(id==='g2') startGame2(content);
+  else if(id==='g3') startGame3(content);
+  else if(id==='g4') startGame4(content);
+  else if(id==='g5') startGame5(content);
+}
+
+function completeGame(id, score, total){
+  state.progress.games[id] = true;
+  state.progress.gamesScores[id] = score;
+  saveState();
+  SFX.win(); confetti(60);
+  toast('Modul selesai! Skor ' + score + '/' + total + ' ⭐','ok');
+}
+
+function gameCompleteView(content, id, score, total, restartFn){
+  content.innerHTML = `
+    <div class="game-panel">
+      <div class="game-complete">
+        <span class="big-emoji">${score===total?'🏆':'🎉'}</span>
+        <h3>${score===total?'Sempurna!':'Kerja Bagus!'}</h3>
+        <p>Skor kamu: <strong>${score} / ${total}</strong> soal benar.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-sun" id="retryGame">🔁 Main Lagi</button>
+          <button class="btn btn-mint" id="toGames">📚 Pilih Modul Lain</button>
+        </div>
+      </div>
+    </div>
+  `;
+  document.getElementById('retryGame').addEventListener('click', ()=>{
+    document.getElementById('gameContent').innerHTML='';
+    restartFn();
+  });
+  document.getElementById('toGames').addEventListener('click', ()=>{
+    document.getElementById('gameView').classList.add('hidden');
+    document.getElementById('gameGrid').classList.remove('hidden');
+    renderGameGrid();
+  });
+}
+
+/* --- Game 1: Sortir Benda --- */
+const G1_ITEMS = [
+  { id:'buku', emoji:'📓', label:'Buku Tulis', bin:'penggaris' },
+  { id:'beras', emoji:'🍚', label:'Sekarung Beras 5 kg', bin:'timbangan' },
+  { id:'pintu', emoji:'🚪', label:'Panjang Pintu Kelas', bin:'meteran' },
+  { id:'pinggang', emoji:'📏', label:'Lingkar Pinggang Celana', bin:'kain' }
+];
+const G1_BINS = [
+  { id:'penggaris', emoji:'📏', label:'Penggaris' },
+  { id:'meteran', emoji:'📐', label:'Meteran Rol' },
+  { id:'kain', emoji:'🧵', label:'Meteran Kain' },
+  { id:'timbangan', emoji:'⚖️', label:'Timbangan' }
+];
+
+function startGame1(content){
+  let selected = null;
+  let placed = 0;
+  const total = G1_ITEMS.length;
+
+  function render(){
+    content.innerHTML = `
+      <div class="game-panel">
+        <div class="game-head">
+          <h3>🎯 Modul 1: Sortir Benda & Alat Ukur</h3>
+          <p>1) Klik benda. 2) Klik keranjang alat ukur yang tepat.</p>
+        </div>
+        <div class="game-progress">
+          <span>Benar: ${placed}/${total}</span>
+          <span>Sisa: ${total - placed}</span>
+        </div>
+        <div class="g1-items" id="g1Items">
+          ${G1_ITEMS.map(it=>{
+            const done = it._placed;
+            return `<div class="g1-item ${done?'placed':''}" data-item="${it.id}">
+              <span class="emoji">${it.emoji}</span>
+              <span class="label">${it.label}</span>
+            </div>`;
+          }).join('')}
+        </div>
+        <div class="g1-bins">
+          ${G1_BINS.map(b=>`
+            <div class="g1-bin" data-bin="${b.id}">
+              <span class="bin-emoji">${b.emoji}</span>
+              <span class="bin-label">${b.label}</span>
+              <div class="bin-contents">${G1_ITEMS.filter(i=>i._placed && i.bin===b.id).map(i=>i.emoji).join(' ')}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    content.querySelectorAll('.g1-item').forEach(el=>{
+      if(el.classList.contains('placed')) return;
+      el.addEventListener('click', ()=>{
+        content.querySelectorAll('.g1-item').forEach(x=>x.classList.remove('selected'));
+        el.classList.add('selected');
+        selected = el.dataset.item;
+        SFX.click();
+      });
+    });
+    content.querySelectorAll('.g1-bin').forEach(bin=>{
+      bin.addEventListener('click', ()=>{
+        if(!selected) { toast('Pilih benda dulu ya 😊'); return; }
+        const item = G1_ITEMS.find(i=>i.id===selected);
+        if(!item || item._placed) return;
+        if(item.bin === bin.dataset.bin){
+          item._placed = true;
+          placed++;
+          SFX.correct(); confetti(20);
+          toast('Benar! 🎉','ok');
+          render();
+          if(placed === total){
+            completeGame('g1', total, total);
+            gameCompleteView(content, 'g1', total, total, ()=>startGame1(content));
+          }
+        } else {
+          SFX.wrong();
+          bin.style.animation='shake .3s';
+          setTimeout(()=>bin.style.animation='', 320);
+          toast('Belum tepat, coba lagi!','no');
+        }
+      });
+    });
+  }
+  render();
+}
+
+/* --- Game 2: Jembatan Konversi (flexible matching by value) --- */
+const G2_PAIRS = [
+  { left:'3 m', right:'300 cm', base:300, kind:'panjang' },
+  { left:'2 kg', right:'2.000 g', base:2000, kind:'berat' },
+  { left:'500 g', right:'1 pon', base:500, kind:'berat' },
+  { left:'20 ons', right:'2 kg', base:2000, kind:'berat' }
+];
+
+function parseValueToBase(str){
+  // parse "3 m", "2.000 g", "20 ons", "2 kg", "1 pon", "300 cm"
+  const m = str.trim().match(/^([\d.,]+)\s*(cm|m|kg|g|ons|pon)$/i);
+  if(!m) return null;
+  const val = parseFloat(m[1].replace(/\./g,'').replace(',','.'));
+  const unit = m[2].toLowerCase();
+  const factors = { cm:1, m:100, kg:1000, g:1, ons:100, pon:500 };
+  return { value: val * (factors[unit]||1), kind: (unit==='cm'||unit==='m')?'panjang':'berat' };
+}
+
+function startGame2(content){
+  let selectedLeft = null;
+  let matched = 0;
+  const total = G2_PAIRS.length;
+  // Build shuffled right side
+  let rights = G2_PAIRS.map((p,i)=>({ text:p.right, base:parseValueToBase(p.right), kind:p.kind, origIdx:i }));
+  rights = shuffleArr(rights);
+
+  function render(){
+    content.innerHTML = `
+      <div class="game-panel">
+        <div class="game-head">
+          <h3>🌉 Modul 2: Jembatan Konversi</h3>
+          <p>1) Klik kartu kiri. 2) Klik kartu kanan yang setara.</p>
+        </div>
+        <div class="game-progress">
+          <span>Terhubung: ${matched}/${total}</span>
+          <span>Sisa: ${total - matched}</span>
+        </div>
+        <div class="g2-grid">
+          <div class="g2-col" id="g2Left">
+            ${G2_PAIRS.map((p,i)=>`
+              <button class="g2-card ${p._matched?'matched':''}" data-left="${i}">${p.left}</button>
+            `).join('')}
+          </div>
+          <div class="g2-col" id="g2Right">
+            ${rights.map(r=>`
+              <button class="g2-card ${r._matched?'matched':''}" data-right="${r.origIdx}">${r.text}</button>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+    content.querySelectorAll('[data-left]').forEach(btn=>{
+      if(btn.classList.contains('matched')) return;
+      btn.addEventListener('click', ()=>{
+        content.querySelectorAll('[data-left]').forEach(b=>b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedLeft = parseInt(btn.dataset.left,10);
+        SFX.click();
+      });
+    });
+    content.querySelectorAll('[data-right]').forEach(btn=>{
+      if(btn.classList.contains('matched')) return;
+      btn.addEventListener('click', ()=>{
+        if(selectedLeft === null){ toast('Klik kartu kiri dulu ya 😊'); return; }
+        const leftP = G2_PAIRS[selectedLeft];
+        const rightP = G2_PAIRS.find(p => {
+          const rCard = rights.find(r=>r.origIdx===parseInt(btn.dataset.right,10));
+          return rCard && p.right === rCard.text;
+        });
+        const leftBase = parseValueToBase(leftP.left);
+        const rightBase = parseValueToBase(btn.textContent);
+        if(leftBase && rightBase && leftBase.value === rightBase.value && leftBase.kind === rightBase.kind){
+          leftP._matched = true;
+          rights.find(r=>r.origIdx===parseInt(btn.dataset.right,10))._matched = true;
+          matched++;
+          SFX.correct(); confetti(20);
+          toast('Cocok! 🎉','ok');
+          selectedLeft = null;
+          render();
+          if(matched === total){
+            completeGame('g2', total, total);
+            gameCompleteView(content, 'g2', total, total, ()=>startGame2(content));
+          }
+        } else {
+          SFX.wrong();
+          btn.style.animation='shake .3s';
+          setTimeout(()=>btn.style.animation='',320);
+          toast('Belum cocok, coba lagi!','no');
+        }
+      });
+    });
+  }
+  render();
+}
+
+function shuffleArr(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+/* --- Game 3: Detektif Skala --- */
+const G3_DATA = [
+  {
+    illustration:'📏✏️',
+    caption:'Ujung pensil di angka 6,8 cm pada penggaris.',
+    q:'Berapa pembulatan panjang pensil ke cm terdekat?',
+    options:['6 cm','7 cm'], answer:1,
+    hint:'Angka 8 ≥ 5, jadi dibulatkan ke atas menjadi 7 cm.'
+  },
+  {
+    illustration:'⚖️🍰',
+    caption:'Jarum timbangan kue menunjukkan 420 g.',
+    q:'Pembulatan ke ratusan gram terdekat adalah…',
+    options:['400 g','500 g'], answer:0,
+    hint:'Angka 20 < 50, jadi dibulatkan ke bawah menjadi 400 g.'
+  },
+  {
+    illustration:'📱🍉',
+    caption:'Layar timbangan digital menunjukkan 3,4 kg.',
+    q:'Pembulatan ke kg terdekat adalah…',
+    options:['3 kg','4 kg'], answer:0,
+    hint:'Angka 4 < 5, jadi dibulatkan ke bawah menjadi 3 kg.'
+  }
+];
+
+function startGame3(content){
+  let idx = 0, score = 0;
+  function render(){
+    if(idx >= G3_DATA.length){
+      completeGame('g3', score, G3_DATA.length);
+      gameCompleteView(content, 'g3', score, G3_DATA.length, ()=>startGame3(content));
+      return;
+    }
+    const item = G3_DATA[idx];
+    content.innerHTML = `
+      <div class="game-panel">
+        <div class="game-head">
+          <h3>🔍 Modul 3: Detektif Skala</h3>
+          <p>Baca gambar, lalu pilih pembulatan yang tepat.</p>
+        </div>
+        <div class="game-progress">
+          <span>Soal ${idx+1} / ${G3_DATA.length}</span>
+          <span>Benar: ${score}</span>
+        </div>
+        <div class="gq-illustration">${item.illustration}<span class="caption">${item.caption}</span></div>
+        <div class="gq-question">${item.q}</div>
+        <div class="gq-options" id="gqOpts">
+          ${item.options.map((o,i)=>`<button class="gq-option" data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+        </div>
+        <div class="gq-feedback" id="gqFb"></div>
+      </div>
+    `;
+    let answered = false;
+    content.querySelectorAll('.gq-option').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(answered) return;
+        answered = true;
+        const chosen = parseInt(btn.dataset.i,10);
+        const fb = document.getElementById('gqFb');
+        content.querySelectorAll('.gq-option').forEach(b=>b.disabled=true);
+        if(chosen === item.answer){
+          btn.classList.add('correct');
+          fb.textContent = '✅ ' + item.hint;
+          fb.className = 'gq-feedback ok';
+          score++;
+          SFX.correct(); confetti(15);
+        } else {
+          btn.classList.add('wrong');
+          content.querySelectorAll('.gq-option')[item.answer].classList.add('correct');
+          fb.textContent = '❌ ' + item.hint;
+          fb.className = 'gq-feedback no';
+          SFX.wrong();
+        }
+        setTimeout(()=>{ idx++; render(); }, 1400);
+      });
+    });
+  }
+  render();
+}
+
+/* --- Game 4: Kasir Cilik --- */
+const G4_DATA = [
+  {
+    emoji:'🥚🛒',
+    q:'Ibu membeli 1 kg telur dan 500 gram gula. Berapa gram total belanjaan Ibu?',
+    options:['1.500 g','600 g'], answer:0,
+    hint:'1 kg = 1.000 g. 1.000 + 500 = 1.500 g.'
+  },
+  {
+    emoji:'🎀✂️',
+    q:'Budi membeli pita 2 m, lalu memotong 80 cm. Berapa cm sisa pita Budi?',
+    options:['120 cm','180 cm'], answer:0,
+    hint:'2 m = 200 cm. 200 − 80 = 120 cm.'
+  },
+  {
+    emoji:'🧈🥤',
+    q:'Kakak membawa 2 pon mentega. Ayah membawa 1 kg minyak. Siapa yang membawa lebih berat?',
+    options:['Sama berat','Ayah lebih berat'], answer:0,
+    hint:'2 pon = 1.000 g = 1 kg. Jadi keduanya sama berat.'
+  }
+];
+
+function startGame4(content){
+  let idx = 0, score = 0;
+  function render(){
+    if(idx >= G4_DATA.length){
+      completeGame('g4', score, G4_DATA.length);
+      gameCompleteView(content, 'g4', score, G4_DATA.length, ()=>startGame4(content));
+      return;
+    }
+    const item = G4_DATA[idx];
+    content.innerHTML = `
+      <div class="game-panel">
+        <div class="game-head">
+          <h3>🛒 Modul 4: Kasir Cilik</h3>
+          <p>Baca soal cerita, lalu pilih jawaban yang benar.</p>
+        </div>
+        <div class="game-progress">
+          <span>Soal ${idx+1} / ${G4_DATA.length}</span>
+          <span>Benar: ${score}</span>
+        </div>
+        <div class="gq-illustration">${item.emoji}</div>
+        <div class="gq-question">${item.q}</div>
+        <div class="gq-options" id="gqOpts">
+          ${item.options.map((o,i)=>`<button class="gq-option" data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+        </div>
+        <div class="gq-feedback" id="gqFb"></div>
+      </div>
+    `;
+    let answered = false;
+    content.querySelectorAll('.gq-option').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(answered) return;
+        answered = true;
+        const chosen = parseInt(btn.dataset.i,10);
+        const fb = document.getElementById('gqFb');
+        content.querySelectorAll('.gq-option').forEach(b=>b.disabled=true);
+        if(chosen === item.answer){
+          btn.classList.add('correct');
+          fb.textContent = '✅ ' + item.hint;
+          fb.className = 'gq-feedback ok';
+          score++;
+          SFX.correct(); confetti(15);
+        } else {
+          btn.classList.add('wrong');
+          content.querySelectorAll('.gq-option')[item.answer].classList.add('correct');
+          fb.textContent = '❌ ' + item.hint;
+          fb.className = 'gq-feedback no';
+          SFX.wrong();
+        }
+        setTimeout(()=>{ idx++; render(); }, 1500);
+      });
+    });
+  }
+  render();
+}
+
+/* --- Game 5: Ayo Berpikir! --- */
+const G5_DATA = [
+  {
+    emoji:'🌳',
+    q:'Siti ingin mengukur keliling batang pohon di taman. Mengapa meteran kain lebih cocok dibanding penggaris plastik?',
+    options:['Karena meteran kain lentur, bisa mengikuti bentuk melengkung','Karena meteran kain lebih murah harganya'],
+    answer:0,
+    hint:'Tepat! Batang pohon berbentuk melengkung, jadi butuh alat ukur yang lentur.'
+  },
+  {
+    emoji:'🥭',
+    q:'Eko menimbang mangga, jarum di antara 1 kg dan 2 kg, tapi lebih dekat ke 2 kg. Angka berapa yang sebaiknya dicatat?',
+    options:['Dibulatkan ke 2 kg karena lebih dekat','Dibulatkan ke 1 kg karena masih di bawah 2'],
+    answer:0,
+    hint:'Benar! Jika lebih dekat ke 2 kg, dibulatkan ke atas menjadi 2 kg.'
+  },
+  {
+    emoji:'🍚',
+    q:'Toko Pak Tani menjual beras dalam karung 10 kg. Jika pembeli hanya ingin membeli 1.000 gram, berapa gram yang ia dapatkan?',
+    options:['1.000 gram (setara 1 kg)','100 gram (setara 0,1 kg)'],
+    answer:0,
+    hint:'Tepat! 1.000 gram = 1 kg. Pembeli hanya butuh 1 kg dari karung 10 kg.'
+  }
+];
+
+function startGame5(content){
+  let idx = 0, score = 0;
+  function render(){
+    if(idx >= G5_DATA.length){
+      completeGame('g5', score, G5_DATA.length);
+      gameCompleteView(content, 'g5', score, G5_DATA.length, ()=>startGame5(content));
+      return;
+    }
+    const item = G5_DATA[idx];
+    content.innerHTML = `
+      <div class="game-panel">
+        <div class="game-head">
+          <h3>🧠 Modul 5: Ayo Berpikir!</h3>
+          <p>Pilih alasan yang paling tepat.</p>
+        </div>
+        <div class="game-progress">
+          <span>Kasus ${idx+1} / ${G5_DATA.length}</span>
+          <span>Benar: ${score}</span>
+        </div>
+        <div class="gq-illustration">${item.emoji}</div>
+        <div class="gq-question">${item.q}</div>
+        <div class="gq-options" id="gqOpts">
+          ${item.options.map((o,i)=>`<button class="gq-option" data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+        </div>
+        <div class="gq-feedback" id="gqFb"></div>
+      </div>
+    `;
+    let answered = false;
+    content.querySelectorAll('.gq-option').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(answered) return;
+        answered = true;
+        const chosen = parseInt(btn.dataset.i,10);
+        const fb = document.getElementById('gqFb');
+        content.querySelectorAll('.gq-option').forEach(b=>b.disabled=true);
+        if(chosen === item.answer){
+          btn.classList.add('correct');
+          fb.textContent = '✅ ' + item.hint;
+          fb.className = 'gq-feedback ok';
+          score++;
+          SFX.correct(); confetti(15);
+        } else {
+          btn.classList.add('wrong');
+          content.querySelectorAll('.gq-option')[item.answer].classList.add('correct');
+          fb.textContent = '❌ ' + item.hint;
+          fb.className = 'gq-feedback no';
+          SFX.wrong();
+        }
+        setTimeout(()=>{ idx++; render(); }, 1600);
+      });
+    });
+  }
+  render();
+}
+
+/* ========== 10. KUIS EVALUASI (10 Soal) ========== */
+const QUIZ_DATA = [
+  { q:'Panjang pita 2 m 30 cm. Berapa panjang pita dalam cm?',
+    options:['23 cm','203 cm','230 cm','2.300 cm'], answer:2,
+    exp:'2 m = 200 cm, lalu 200 + 30 = 230 cm.' },
+  { q:'4.500 cm = ... m',
+    options:['4,5 m','45 m','450 m','4.500 m'], answer:1,
+    exp:'cm ke m naik 2 tangga, jadi ÷100. 4.500 ÷ 100 = 45 m.' },
+  { q:'Alat ukur paling tepat untuk mengukur lingkar pinggang adalah…',
+    options:['Penggaris','Meteran kain','Meteran tukang kayu','Timbangan badan'], answer:1,
+    exp:'Meteran kain lentur, cocok untuk bidang melengkung seperti tubuh.' },
+  { q:'3 kg + 500 gram = ... gram',
+    options:['350 g','305 g','3.500 g','35.000 g'], answer:2,
+    exp:'3 kg = 3.000 g. 3.000 + 500 = 3.500 g.' },
+  { q:'2 pon = ... kg',
+    options:['0,5 kg','1 kg','2 kg','4 kg'], answer:1,
+    exp:'1 pon = 500 g. Jadi 2 pon = 1.000 g = 1 kg.' },
+  { q:'4 ons = ... gram',
+    options:['40 g','100 g','400 g','4.000 g'], answer:2,
+    exp:'1 ons = 100 g. Jadi 4 ons = 4 × 100 = 400 g.' },
+  { q:'Panjang pensil 7,2 cm. Pembulatan ke cm terdekat adalah…',
+    options:['6 cm','7 cm','8 cm','9 cm'], answer:1,
+    exp:'Angka 2 < 5, jadi dibulatkan ke bawah menjadi 7 cm.' },
+  { q:'Timbangan menunjukkan 4,6 kg. Pembulatan ke kg terdekat…',
+    options:['3 kg','4 kg','5 kg','6 kg'], answer:2,
+    exp:'Angka 6 ≥ 5, jadi dibulatkan ke atas menjadi 5 kg.' },
+  { q:'Ibu membeli 2 kg gula dan 700 gram tepung. Total belanjaan Ibu ... gram.',
+    options:['270 g','900 g','2.700 g','7.200 g'], answer:2,
+    exp:'2 kg = 2.000 g. 2.000 + 700 = 2.700 g.' },
+  { q:'Budi membeli pita 3 m, dipotong 120 cm. Sisa pita ... cm.',
+    options:['30 cm','120 cm','180 cm','280 cm'], answer:2,
+    exp:'3 m = 300 cm. 300 − 120 = 180 cm.' }
+];
+
+let quizState = { idx:0, answers:[], finished:false };
+
+function renderQuizStart(){
+  quizState = { idx:0, answers:[], finished:false };
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+  const container = document.getElementById('quizContainer');
+  if(quizState.idx >= QUIZ_DATA.length){
+    renderQuizResult();
+    return;
+  }
+  const item = QUIZ_DATA[quizState.idx];
+  const pct = Math.round((quizState.idx / QUIZ_DATA.length) * 100);
+  container.innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-head">
+        <span>Soal ${quizState.idx+1} dari ${QUIZ_DATA.length}</span>
+        <span>${pct}%</span>
+      </div>
+      <div class="quiz-track"><div style="width:${pct}%"></div></div>
+      <h3 class="quiz-q">${item.q}</h3>
+      <div class="quiz-options" id="qOpts">
+        ${item.options.map((o,i)=>`<button class="quiz-option" data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="qFb"></div>
+    </div>
+  `;
+  let answered = false;
+  container.querySelectorAll('.quiz-option').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      if(answered) return;
+      answered = true;
+      const chosen = parseInt(btn.dataset.i,10);
+      const fb = document.getElementById('qFb');
+      container.querySelectorAll('.quiz-option').forEach(b=>b.disabled=true);
+      const correct = chosen === item.answer;
+      if(correct){
+        btn.classList.add('correct');
+        fb.textContent = '✅ Benar! ' + item.exp;
+        fb.className = 'quiz-feedback ok';
+        SFX.correct();
+      } else {
+        btn.classList.add('wrong');
+        container.querySelectorAll('.quiz-option')[item.answer].classList.add('correct');
+        fb.textContent = '❌ Belum tepat. ' + item.exp;
+        fb.className = 'quiz-feedback no';
+        SFX.wrong();
+      }
+      quizState.answers.push({ idx: quizState.idx, chosen, correct });
+      // Next button
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'btn btn-primary';
+      nextBtn.style.marginTop = '12px';
+      nextBtn.textContent = (quizState.idx === QUIZ_DATA.length-1) ? 'Lihat Hasil 🎉' : 'Soal Berikutnya →';
+      nextBtn.addEventListener('click', ()=>{
+        quizState.idx++;
+        renderQuizQuestion();
+      });
+      container.querySelector('.quiz-card').appendChild(nextBtn);
+    });
+  });
+}
+
+function renderQuizResult(){
+  const correct = quizState.answers.filter(a=>a.correct).length;
+  const total = QUIZ_DATA.length;
+  const score = Math.round(correct/total*100);
+  const medal = score === 100 ? '🥇' : score >= 70 ? '🥈' : '🎖️';
+  const badge = score === 100 ? 'Master Ukur Gold' : score >= 70 ? 'Detektif Ukur Silver' : 'Calon Detektif';
+
+  // Save to state
+  state.progress.quizDone = true;
+  if(score > state.quiz.bestScore) state.quiz.bestScore = score;
+  state.quiz.history.unshift({
+    date: new Date().toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' }),
+    score, correct, total
+  });
+  if(state.quiz.history.length > 10) state.quiz.history = state.quiz.history.slice(0,10);
+  saveState();
+
+  if(score >= 70){ SFX.win(); confetti(80); }
+
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = `
+    <div class="quiz-card">
+      <div class="quiz-result">
+        <span class="medal">${medal}</span>
+        <h3>${score === 100 ? 'Luar Biasa!' : score >= 70 ? 'Hebat Sekali!' : 'Terus Semangat!'}</h3>
+        <div class="score-num">${score}</div>
+        <span class="badge-name">${badge}</span>
+        <p>Benar ${correct} dari ${total} soal</p>
+        <div class="actions">
+          <button class="btn btn-primary" id="reviewBtn">📖 Pembahasan Soal</button>
+          <button class="btn btn-sun" id="retryQuizBtn">🔁 Ulangi Kuis</button>
+        </div>
+        <div id="reviewList" class="hidden"></div>
+      </div>
+    </div>
+  `;
+  document.getElementById('reviewBtn').addEventListener('click', ()=>{
+    const list = document.getElementById('reviewList');
+    if(!list.classList.contains('hidden')){ list.classList.add('hidden'); return; }
+    list.classList.remove('hidden');
+    list.innerHTML = '<h3 style="margin:16px 0 8px;color:var(--sky-d);font-size:1.05rem">Pembahasan Soal</h3>' +
+      QUIZ_DATA.map((q,i)=>{
+        const a = quizState.answers.find(x=>x.idx===i);
+        const ok = a && a.correct;
+        return `<div class="review-item ${ok?'correct':'wrong'}">
+          <h4>${i+1}. ${q.q}</h4>
+          <div class="answer">Jawabanmu: <strong>${a?String.fromCharCode(65+a.chosen):'-'}</strong> · Jawaban benar: <strong>${String.fromCharCode(65+q.answer)}. ${q.options[q.answer]}</strong></div>
+          <div class="answer">💡 ${q.exp}</div>
+        </div>`;
+      }).join('');
+  });
+  document.getElementById('retryQuizBtn').addEventListener('click', ()=>{
+    quizState = { idx:0, answers:[], finished:false };
+    renderQuizQuestion();
+  });
+}
+
+/* ========== 11. HASIL BELAJAR ========== */
+function renderHasil(){
+  const pct = calcProgress();
+  const totalGamesDone = ['g1','g2','g3','g4','g5'].filter(g=>state.progress.games[g]).length;
+  const totalMateriDone = ['panjang','berat','penerapan'].filter(k=>state.progress.materi[k]).length;
+  const bestScore = state.quiz.bestScore;
+
+  // Badges
+  const badges = [
+    { id:'gold', emoji:'🥇', label:'Master Ukur Gold', earned: bestScore === 100 },
+    { id:'silver', emoji:'🥈', label:'Detektif Silver', earned: bestScore >= 70 },
+    { id:'game', emoji:'🎮', label:'Rajin Bermain', earned: totalGamesDone === 5 },
+    { id:'materi', emoji:'📚', label:'Kutu Buku', earned: totalMateriDone === 3 }
+  ];
+
+  const container = document.getElementById('hasilContent');
+  container.innerHTML = `
+    <div class="welcome-card" style="margin-bottom:20px">
+      <div class="welcome-avatar">${state.user.avatar}</div>
+      <div>
+        <h2>${state.user.name}</h2>
+        <p>Kelas ${state.user.kelas} · Detektif Misi Ukur</p>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num">${pct}%</div><div class="stat-lbl">Kemajuan</div></div>
+      <div class="stat-card"><div class="stat-num">${totalMateriDone}/3</div><div class="stat-lbl">Materi Selesai</div></div>
+      <div class="stat-card"><div class="stat-num">${totalGamesDone}/5</div><div class="stat-lbl">Game Selesai</div></div>
+      <div class="stat-card"><div class="stat-num">${bestScore}</div><div class="stat-lbl">Skor Kuis Terbaik</div></div>
+    </div>
+    <h3 style="margin:16px 0 10px;color:var(--sky-d);font-size:1.1rem">🏅 Lencana Pencapaian</h3>
+    <div class="badge-grid">
+      ${badges.map(b=>`
+        <div class="badge-item ${b.earned?'earned':''}" title="${b.label}">
+          ${b.earned ? b.emoji : '🔒'}
+        </div>
+      `).join('')}
+    </div>
+    <div class="history-list">
+      <h3>📜 Riwayat Kuis (10 terakhir)</h3>
+      ${state.quiz.history.length === 0
+        ? '<p style="color:var(--muted);font-size:.9rem">Belum ada riwayat. Ayo kerjakan kuis!</p>'
+        : state.quiz.history.map(h=>`
+          <div class="history-item">
+            <span>${h.date}</span>
+            <span>${h.correct}/${h.total} benar</span>
+            <span class="history-score">${h.score}</span>
+          </div>
+        `).join('')
+      }
+    </div>
+    <div style="margin-top:20px;text-align:center">
+      <button class="btn btn-ghost" id="resetDataBtn" style="font-size:.85rem;padding:10px 20px;min-height:44px">🗑️ Reset Data Belajar</button>
+    </div>
+  `;
+  document.getElementById('resetDataBtn').addEventListener('click', ()=>{
+    if(confirm('Yakin ingin menghapus semua data belajar? Tindakan ini tidak bisa dibatalkan.')){
+      localStorage.removeItem(STORAGE_KEY);
+      state = JSON.parse(JSON.stringify(DEFAULT_STATE));
+      toast('Data berhasil direset','ok');
+      setTimeout(()=>showPage('login'), 800);
+    }
+  });
+}
+
+/* ========== 12. PETUNJUK ========== */
+function renderPetunjuk(){
+  const c = document.getElementById('petunjukContent');
+  c.innerHTML = `
+    <div class="info-card">
+      <h3>🎯 Cara Bermain</h3>
+      <ol>
+        <li><strong>Isi nama &amp; kelas</strong> lalu pilih avatar detektif.</li>
+        <li><strong>Buka Materi</strong> — baca tiap sub-misi, jawab Mini Check.</li>
+        <li><strong>Mainkan 5 Game</strong> — sortir, jembatan, skala, kasir, berpikir.</li>
+        <li><strong>Kerjakan Kuis Evaluasi</strong> — 10 soal pilihan ganda.</li>
+        <li><strong>Kumpulkan lencana</strong> dan raih predikat Master Ukur!</li>
+      </ol>
+    </div>
+    <div class="info-card">
+      <h3>💡 Tips Belajar</h3>
+      <ul>
+        <li>Baca materi pelan-pelan, jangan terburu-buru.</li>
+        <li>Kalau salah, jangan sedih — coba lagi sampai bisa!</li>
+        <li>Gunakan tombol 🔊 untuk menyalakan/mematikan suara.</li>
+        <li>Progresmu otomatis tersimpan di browser.</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🔊 Tombol Navigasi</h3>
+      <ul>
+        <li><strong>🏠 Beranda</strong> — kembali ke dashboard.</li>
+        <li><strong>🔊 Suara</strong> — nyalakan/matikan efek suara.</li>
+        <li><strong>← Kembali</strong> — kembali ke halaman sebelumnya.</li>
+      </ul>
+    </div>
+  `;
+}
+
+/* ========== 13. TENTANG ========== */
+function renderTentang(){
+  const c = document.getElementById('tentangContent');
+  c.innerHTML = `
+    <div class="info-card">
+      <h3>📚 Identitas Media</h3>
+      <p><strong>Nama:</strong> Misi Ukur — Pengukuran Panjang &amp; Berat</p>
+      <p><strong>Mata Pelajaran:</strong> Matematika</p>
+      <p><strong>Kelas:</strong> IV SD/MI</p>
+      <p><strong>Topik:</strong> Pengukuran Panjang dan Berat</p>
+      <p><strong>Model:</strong> Game-based Learning &amp; Discovery Learning</p>
+    </div>
+    <div class="info-card">
+      <h3>🎯 Capaian Pembelajaran</h3>
+      <ul>
+        <li>Mengenal satuan panjang (km–mm) dan hubungannya.</li>
+        <li>Mengenal satuan berat (kg–mg, ons, pon) dan hubungannya.</li>
+        <li>Melakukan konversi antarsatuan panjang &amp; berat.</li>
+        <li>Memilih alat ukur yang sesuai.</li>
+        <li>Menyelesaikan masalah kontekstual pengukuran.</li>
+        <li>Melakukan pembulatan hasil pengukuran.</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>👨‍💻 Pengembang</h3>
+      <p>Dikembangkan sebagai media pembelajaran interaktif untuk siswa Kelas IV SD/MI.</p>
+      <p><strong>Tahun:</strong> 2025</p>
+      <p><strong>Teknologi:</strong> HTML5, CSS3, JavaScript (Vanilla) — tanpa framework.</p>
+    </div>
+    <div class="info-card">
+      <h3>💬 Pesan Si Kiko</h3>
+      <p>"Terima kasih sudah membantu Kiko memecahkan misi pengukuran! Teruslah berlatih, calon detektif hebat!" 🐱🔍</p>
+    </div>
+  `;
+}
+
+/* ========== 14. SOUND TOGGLE & INIT ========== */
+const soundBtn = document.getElementById('soundBtn');
+function updateSoundBtn(){
+  if(state.sound){ soundBtn.textContent='🔊'; soundBtn.classList.remove('muted'); }
+  else { soundBtn.textContent='🔇'; soundBtn.classList.add('muted'); }
+}
+soundBtn.addEventListener('click', ()=>{
+  state.sound = !state.sound;
+  saveState();
+  updateSoundBtn();
+  if(state.sound) SFX.click();
+  toast(state.sound ? 'Suara dinyalakan 🔊' : 'Suara dimatikan 🔇', 'ok');
+});
+
+// Resume AudioContext on first interaction
+document.addEventListener('click', function once(){
+  SFX.ensure();
+  document.removeEventListener('click', once);
+}, { once:true });
+
+// Init
+renderAvatars();
+updateSoundBtn();
+showPage(state.user.loggedIn ? 'dashboard' : 'login');
+</script>
+</body>
+</html>
